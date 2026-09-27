@@ -82,6 +82,9 @@
           "2a02:6b8:0:1::feed:0ff"
         ]
       },
+
+      "queryStrategy": "UseIPv4",
+
       "servers": [
         "https://cloudflare-dns.com/dns-query",
         {
@@ -111,8 +114,10 @@
           "tag": "domestic-dns_2_0"
         }
       ],
+
       "tag": "dns-module"
     },
+
     "inbounds": [
       {
         "listen": "127.0.0.1",
@@ -153,16 +158,20 @@
         "tag": "http"
       }
     ],
+
     "log": {
       "loglevel": "warning"
     },
+
     "outbounds": [
       {
         "mux": {
           "concurrency": -1,
           "enabled": false
         },
+
         "protocol": "vless",
+
         "settings": {
           "address": "jadynjaqueline.cc.cd",
           "encryption": "none",
@@ -170,6 +179,7 @@
           "level": 8,
           "port": 443
         },
+
         "streamSettings": {
           "finalmask": {
             "tcp": [
@@ -204,40 +214,55 @@
               }
             ]
           },
+
           "network": "ws",
           "security": "tls",
+
           "tlsSettings": {
             "allowInsecure": false,
-            "cipherSuites": "TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA:TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA:TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256:TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256",
+            "cipherSuites": "TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
             "fingerprint": "unsafe",
             "serverName": "Hq0cid-3mni31owS8v2M6.PAGeS.Dev"
           },
+
           "wsSettings": {
             "host": "hq0cid-3mni31ows8v2m6.pages.dev",
             "path": "/vl/6ZngEcuM21rbT1fee3p"
           }
         },
+
+        "sockopt": {
+          "domainStrategy": "UseIPv4"
+        },
+
         "tag": "proxy"
       },
+
       {
         "protocol": "freedom",
+
         "streamSettings": {
           "network": "tcp",
           "sockopt": {
-            "domainStrategy": "UseIP"
+            "domainStrategy": "UseIPv4"
           }
         },
+
         "tag": "direct"
       },
+
       {
         "protocol": "blackhole",
         "settings": {},
         "tag": "block"
       }
     ],
+
     "remarks": "jadynjaqueline.cc.cd - Domain",
+
     "routing": {
-      "domainStrategy": "AsIs",
+      "domainStrategy": "UseIPv4",
+
       "rules": [
         {
           "domain": [
@@ -246,6 +271,7 @@
           "outboundTag": "proxy",
           "type": "field"
         },
+
         {
           "ip": [
             "geoip:private"
@@ -253,6 +279,7 @@
           "outboundTag": "direct",
           "type": "field"
         },
+
         {
           "domain": [
             "geosite:private"
@@ -260,6 +287,7 @@
           "outboundTag": "direct",
           "type": "field"
         },
+
         {
           "ip": [
             "223.5.5.5",
@@ -301,6 +329,7 @@
           "outboundTag": "direct",
           "type": "field"
         },
+
         {
           "domain": [
             "domain:alidns.com",
@@ -312,6 +341,7 @@
           "outboundTag": "direct",
           "type": "field"
         },
+
         {
           "inboundTag": [
             "dns-module"
